@@ -1,0 +1,7 @@
+# ignore Intellij Idea sprcific files
+*.iml
+.idea/
+
+# ignore build sprcific directories
+target/
+build/
