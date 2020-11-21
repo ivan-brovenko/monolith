@@ -2,6 +2,8 @@ package com.ivanbr.monolith.service.tmdb.impl;
 
 import com.ivanbr.monolith.entity.Actor;
 import com.ivanbr.monolith.service.tmdb.TmdbApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -13,6 +15,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class TmdbApiImpl implements TmdbApi {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TmdbApiImpl.class);
 
     @Value("${tmdb.apikey}")
     private String tmdbApiKey;
@@ -31,10 +35,14 @@ public class TmdbApiImpl implements TmdbApi {
     }
 
     public Actor findActorById(Long actorId) {
+        LOGGER.info("Start findActorById() with actor's id: {}", actorId);
         String url = getTmdbUrl("person", actorId.toString());
         ResponseEntity<Actor> responseEntity = restTemplate
-                .exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<Actor>() {});
-        return responseEntity.getBody();
+                .exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<Actor>() {
+                });
+        Actor foundActor = responseEntity.getBody();
+        LOGGER.info("End findActorById() with found actor: {}", foundActor);
+        return foundActor;
     }
 
     private String getTmdbUrl(String... path) {

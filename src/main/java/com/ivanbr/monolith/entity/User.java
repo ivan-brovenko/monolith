@@ -1,9 +1,6 @@
 package com.ivanbr.monolith.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(UserDto userDto) {
+        LOGGER.info("Start registerUser() with user dto: {}", userDto);
         userRepository
                 .findByEmail(userDto.getEmail())
                 .ifPresent((user) -> {
@@ -68,41 +69,54 @@ public class UserServiceImpl implements UserService {
 
         User user = modelMapper.map(userDto, User.class);
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        LOGGER.info("End registerUser() with a result: {}", savedUser);
+        return savedUser;
     }
 
     @Override
     public User findUserByEmail(String userEmail) {
-        return userRepository
+        LOGGER.info("Start findUserByEmail() with user's email: {}", userEmail);
+        User foundUser = userRepository
                 .findByEmail(userEmail)
                 .orElseThrow(() -> new UserDoesNotExistException("User with email: " +
                         userEmail + "does not exist"));
+        LOGGER.info("End findUserByEmail() with a result: {}", foundUser);
+        return foundUser;
     }
 
     @Override
     public List<User> findAllUsers() {
-        return userRepository.findAll();
+        LOGGER.info("Start findAllUsers()");
+        List<User> users = userRepository.findAll();
+        LOGGER.info("End findAllUsers() with a result: {}", users);
+        return users;
     }
 
     @Override
     public User updateUser(UserDto userDto, Long userId) {
+        LOGGER.info("Start updateUser() with user's id: {} and new user data {}", userId, userDto);
         User user = findUserById(userId);
 
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        return userRepository.save(user);
+        User updatedUser = userRepository.save(user);
+        LOGGER.info("End updateUser() with a result: {}", updatedUser);
+        return updatedUser;
     }
 
     @Override
     public void deleteUserById(Long userId) {
+        LOGGER.info("Start deleteUserById() with user's id: {}", userId);
         userRepository.deleteById(userId);
+        LOGGER.info("End deleteUserById()");
     }
 
     @Override
     public User addActorById(Long userId, Long actorId) {
+        LOGGER.info("Start addActorById() with user's id: {} and actor's id {}", userId, actorId);
         User user = findUserById(userId);
 
         Actor actor = actorService.findActorById(actorId).orElseGet(() -> {
@@ -111,20 +125,21 @@ public class UserServiceImpl implements UserService {
         });
 
         user.getActors().add(actor);
+        LOGGER.info("End addActorById() with updated user: {}", user);
         return user;
     }
 
     @Override
     public User deleteActorById(Long userId, Long actorId) {
+        LOGGER.info("Start deleteActorById() with user's id: {} and actor's id: {}", userId, actorId);
         User user = findUserById(userId);
-        LOGGER.info("Start deletion of actor with id: {} from user: {}", actorId, user);
         user
                 .getActors()
                 .stream()
                 .filter(actor -> actor.getId().equals(actorId))
                 .findFirst()
                 .ifPresent(actor -> user.getActors().remove(actor));
-        LOGGER.info("End deletion of actor with id: {} from user: {}", actorId, user);
+        LOGGER.info("End deleteActorById() with actor's id: {} from user: {}", actorId, user);
         return user;
     }
 
