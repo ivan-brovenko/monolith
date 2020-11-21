@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "email": "testuser@gmail.com",
+  "username": "testUser",
+  "actors": [
+    {
+      "id": 1,
+      "name": "actorName",
+      "birthday": "01-01-1900",
+      "deathday": "01-01-2000"
+    }
+  ]
+}

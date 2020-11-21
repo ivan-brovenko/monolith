@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testmoviedb
+    username: test
+    password: test
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+
+tmdb:
+  api:
+    base:
+      url: https://api.themoviedb.org/3
+  apikey: testApiKeyValue
+  language: en-US

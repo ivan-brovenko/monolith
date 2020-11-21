@@ -15,6 +15,15 @@ public class UserDto {
     @NotEmpty
     private String username;
 
+    public UserDto() {
+    }
+
+    public UserDto(@Email @NotEmpty String email, @NotEmpty String password, @NotEmpty String username) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+    }
+
     public String getEmail() {
         return email;
     }
