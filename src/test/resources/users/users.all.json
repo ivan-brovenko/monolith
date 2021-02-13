@@ -1,18 +1,15 @@
 [
   {
-    "id": 1,
     "email": "testuser1@gmailcom",
     "username": "testUser1",
     "actors": []
   },
   {
-    "id": 2,
     "email": "testuser2@gmailcom",
     "username": "testUser2",
     "actors": []
   },
   {
-    "id": 3,
     "email": "testuser3@gmailcom",
     "username": "testUser3",
     "actors": []

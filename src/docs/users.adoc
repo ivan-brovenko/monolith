@@ -1,0 +1,15 @@
+include::{snippets}/user-post/http-request.adoc[]
+include::{snippets}/user-post/http-response.adoc[]
+include::{snippets}/user-post/response-body.adoc[]
+include::{snippets}/user-post/response-fields.adoc[]
+
+include::{snippets}/users-get/http-request.adoc[]
+include::{snippets}/users-get/http-response.adoc[]
+include::{snippets}/users-get/response-body.adoc[]
+include::{snippets}/users-get/response-fields.adoc[]
+
+include::{snippets}/user-get-by-email/http-request.adoc[]
+include::{snippets}/user-get-by-email/http-response.adoc[]
+include::{snippets}/user-get-by-email/response-body.adoc[]
+include::{snippets}/user-get-by-email/response-fields.adoc[]
+
