@@ -12,6 +12,6 @@ spring:
 tmdb:
   api:
     base:
-      url: https://api.themoviedb.org/3
+      url: http://localhost:8066
   apikey: testApiKeyValue
   language: en-US
